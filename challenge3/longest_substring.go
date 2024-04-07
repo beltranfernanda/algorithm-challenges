@@ -21,7 +21,7 @@ func LengthOfLongestSubstring(s string) int {
 	return maximum
 }
 
-//Most efficient solution
+// Most efficient solution
 func lengthOfLongestSubstring(s string) int {
 	m, l, r := 0, 0, 0
 	used := map[byte]int{}
