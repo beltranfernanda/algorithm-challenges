@@ -43,3 +43,39 @@ func mergeSort(nums1 []int, nums2 []int) []int {
 	}
 	return sortedArray
 }
+
+// Most efficient solution
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+	l1, l2 := len(nums1), len(nums2)
+	stop := (l1 + l2) / 2
+	var nums []int
+
+	if l1 == 0 {
+		nums = nums2
+	} else if l2 == 0 {
+		nums = nums1
+	} else {
+		nums = make([]int, stop+1)
+		for i, j, k := 0, 0, 0; i <= stop; i++ {
+			if j >= l1 {
+				nums[i] = nums2[k]
+				k++
+			} else if k >= l2 {
+				nums[i] = nums1[j]
+				j++
+			} else if nums1[j] <= nums2[k] {
+				nums[i] = nums1[j]
+				j++
+			} else {
+				nums[i] = nums2[k]
+				k++
+			}
+		}
+	}
+
+	if (l1+l2)%2 == 1 {
+		return float64(nums[stop])
+	} else {
+		return (float64(nums[stop]) + float64(nums[stop-1])) * 0.5
+	}
+}
